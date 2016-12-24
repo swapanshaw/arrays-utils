@@ -9,7 +9,7 @@ var PROD = JSON.parse(process.env.PROD_ENV || '0');
      },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
-        minimize: false,
+        minimize: true,
         compress: {
             warnings: true,
         },
