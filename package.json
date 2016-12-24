@@ -1,0 +1,14 @@
+{
+  "name": "string-utils",
+  "version": "1.0.0",
+  "description": "This is a utility library, which will be use by the javascript and use utility method which will be useful instring manupulation",
+  "main": "string-utils",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "optionalDependencies": {
+    "fsevents": "*"
+  },
+  "author": "Swapan Shaw",
+  "license": "MIT"
+}
