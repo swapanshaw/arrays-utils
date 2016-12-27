@@ -1,10 +1,16 @@
-/**
+
+/*!
  * 
  * ArrayUtils library contains utility functions which act on arrayUtils
  * and perform operation like add, addAll, contains, map, reduce etc.
  * 
  * arrays is the global object used to access the different mthod
+ * array-utils <https://github.com/swapanshaw/arrays-utils>
+ * Copyright (c) 2017-2018, Swapan Shaw
+ * Licensed under the MIT License.
  */
+
+'use strict';
 
 var arrays = arrays || {};
 arrays = (function () {
@@ -38,11 +44,23 @@ arrays = (function () {
      * @param arr input array
      * @returns true if array is already sorted else false
      */
-    function isSorted(arr) {
-        let previous = arr[0];
-        let isSorted = true;
-        for(let i = 1; i < arr.length ; i++) {
+    function isSortedAsc(arr) {
+        var previous = arr[0];
+        var isSorted = true;
+        for(var i = 1; i < arr.length ; i++) {
             if(previous > arr[i]){
+                isSorted = false;
+                break;
+            }
+            previous = arr[i];
+        }
+        return isSorted;
+    }
+    function isSortedDesc(arr) {
+        var previous = arr[0];
+        var isSorted = true;
+        for(var i = 1; i < arr.length ; i++) {
+            if(previous < arr[i]){
                 isSorted = false;
                 break;
             }
@@ -184,30 +202,56 @@ arrays = (function () {
          * isSorted method checks whether the array is sorted or not
          * @param arr which is under ispection
          * @param type can be passed to check whether array is sorted in ascending or desending order
-         * pass 'ASC' for ascending and 'DESC' for descending
+         * pass 'ASC' for ascending and 'DESC' for descending, default it will check for ascending order.
          * @returns return 'true' if array is sorted else 'false'
          */
         isSorted: function (arr, type) {
             if (!isArray(arr)) {
                 throw new TypeError("input is not type of array or other is not a type of arrayt");
             }
-            return isSorted(arr);
+            if(type === 'DESC'){
+                return isSortedDesc(arr, type);
+            }else{
+                return isSortedAsc(arr, type);
+            }
+            
+        },
+        /**
+         * isEmpty checks for empty and null array
+         * @param input is array
+         * @returns true is array is empty or null else false
+         */
+        isEmpty : function(arr){
+            if (!isArray(arr)) {
+                throw new TypeError("input is not type of array or other is not a type of arrayt");
+            }
+            if(arr === 'undefined' || arr.length === 0){
+                return true;
+            }else{
+                return false;
+            }
+        },
+        /**
+         * isNotEmpty checks for not empty and not null/undefined array
+         * @param input is array
+         * @returns true is array is empty or null else false
+         */
+        isNotEmpty : function(arr){
+            if (!isArray(arr)) {
+                throw new TypeError("input is not type of array or other is not a type of arrayt");
+            }
+            if(arr === 'undefined' || arr.length > 0){
+                return true;
+            }else{
+                return false;
+            }
         }
 
     }
 })();
 
+//window.arrays = arrays;
 
-// test code
-var arr = [1, 5, 3, 4];
+module.exports = arrays;
 
-//console.log(arrays.contains("hello", 10));
-//console.log(arrays.join([1, 2, 3], ","));
-//console.log(arrays.map([1, 2, 3], x=>x*x));
-console.log(arrays.isSorted(arr));
-console.log(arrays.reduce(["swapa", "sonam", "sss", "sss"], "", function (memo, x) {
-    return memo+x;
-}, 0 ,2));
-
-console.log(arrays.isEqusls(arr, arr));
 
