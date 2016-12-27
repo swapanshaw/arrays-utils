@@ -33,6 +33,23 @@ arrays = (function () {
     function isNumber(o) {
         return Object.prototype.toString.call(o) === '[object Number]';
     }
+    /**
+     * isSorted return check whethe an array is sorted or not
+     * @param arr input array
+     * @returns true if array is already sorted else false
+     */
+    function isSorted(arr) {
+        let previous = arr[0];
+        let isSorted = true;
+        for(let i = 1; i < arr.length ; i++) {
+            if(previous > arr[i]){
+                isSorted = false;
+                break;
+            }
+            previous = arr[i];
+        }
+        return isSorted;
+    }
 
     return {
         /**
@@ -174,10 +191,7 @@ arrays = (function () {
             if (!isArray(arr)) {
                 throw new TypeError("input is not type of array or other is not a type of arrayt");
             }
-
-
-            //checkFOrSort(arr)
-
+            return isSorted(arr);
         }
 
     }
@@ -185,14 +199,12 @@ arrays = (function () {
 
 
 // test code
-var arr = [1, 2, 3, 4];
+var arr = [1, 5, 3, 4];
 
-console.log(arrays.contains(arr, 10));
-console.log(arrays.join([1, 2, 3], ","));
-console.log(arrays.map([1, 2, 3], function (x) {
-    return x * x;
-}));
-
+//console.log(arrays.contains("hello", 10));
+//console.log(arrays.join([1, 2, 3], ","));
+//console.log(arrays.map([1, 2, 3], x=>x*x));
+console.log(arrays.isSorted(arr));
 console.log(arrays.reduce(["swapa", "sonam", "sss", "sss"], "", function (memo, x) {
     return memo+x;
 }, 0 ,2));
